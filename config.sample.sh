@@ -13,6 +13,9 @@ BITRATE=17000000
 #Frames per second for video capture
 FPS=30
 
+#View preview window while recording
+PREVIEW=true
+
 #Verbose output from raspivid
 VERBOSE=true
 
