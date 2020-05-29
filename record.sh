@@ -2,22 +2,30 @@
 
 source config.sh
 
-if [ "$PREVIEW" = true ] ; then
+if [[ $PREVIEW = true ]] ; then
 	PREVIEW_STR="-p"
 else
 	PREVIEW_STR=""
 fi
 
-if [ "$VERBOSE" = true ] ; then
+if [[ $VERBOSE = true ]] ; then
 	VERBOSE_STR="-v"
 else
 	VERBOSE_STR=""
 fi
 
+if [[ $ISO ]] ; then
+	ISO_STR="--ISO $ISO"
+else
+	ISO_STR=""
+fi
+
 echo -n "Filename (minus the extension):"
 read FILENAME
 
-raspivid -o $FILENAME.h264 -t 0 -n -w $WIDTH -h $HEIGHT -b $BITRATE --framerate $FPS --keypress $PREVIEW_STR $VERBOSE_STR
+echo "raspivid -o $FILENAME.h264 -t 0 -n -w $WIDTH -h $HEIGHT -b $BITRATE --framerate $FPS --keypress $PREVIEW_STR $VERBOSE_STR $ISO_STR"
+
+raspivid -o $FILENAME.h264 -t 0 -n -w $WIDTH -h $HEIGHT -b $BITRATE --framerate $FPS --keypress $PREVIEW_STR $VERBOSE_STR $ISO_STR
 
 MP4Box -add $FILENAME.h264 -fps $FPS $FILENAME.mp4
 

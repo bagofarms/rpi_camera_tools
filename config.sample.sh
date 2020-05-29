@@ -14,10 +14,16 @@ BITRATE=17000000
 FPS=30
 
 #View preview window while recording
+#Note: Turning this on will ignore the VERBOSE setting
 PREVIEW=true
 
 #Verbose output from raspivid
+#Note: This setting is ignored when PREVIEW=true
 VERBOSE=true
+
+#Set the ISO (sensitivity) of the image sensor (values: 100-800)
+#Uncomment to set.  Comment out for default
+#ISO=800
 
 #Remove .h264 file after conversion to .mp4 is complete
 REMOVE_H264=true
