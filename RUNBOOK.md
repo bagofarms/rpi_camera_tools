@@ -59,3 +59,15 @@ For 1080p recording, I went with this:
 `raspivid -o presenting_test2.h264 -t 0 -n -w 1920 -h 1080 -b 1700000 --framerate 30 --keypress`
 
 The bitrate of 17Mbps is the highest the Raspberry Pi Foundation recommends for 1080p video, although the max is 25Mbps.
+
+## Webcam usage
+In order to use the Raspberry Pi Camera as a webcam, It seems that you need to have the driver enabled when you boot up.  Here's what I did:
+
+```
+sudo modprobe bcm2835-v4l2
+sudo sed -i -e "\$asnd-bcm2835" /etc/modules
+sudo sed -i -e "\$abcm2835-v4l2" /etc/modules
+echo "options bcm2835-v4l2 gst_v4l2src_is_broken=1" | sudo tee /etc/modprobe.d/bcm2835-v4l2.conf
+```
+
+Taken from the [Raspberry Pi Forums](https://www.raspberrypi.org/forums/viewtopic.php?t=220261).
